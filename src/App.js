@@ -39,9 +39,15 @@ function App() {
         <img src="" alt={"search"} onClick={() => {}} />
       </div>
 
-      <div className="container">
-        <MovieCard movie1={movie1} />
-      </div>
+      {movies ? (
+        <div className="container">
+          <MovieCard movie1={movie1} />
+        </div>
+      ) : (
+        <div className="empty">
+          <h2>No movie found</h2>
+        </div>
+      )}
     </>
   );
 }
