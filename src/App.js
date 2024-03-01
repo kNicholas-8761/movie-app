@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import MovieCard from "./MovieCard";
 import "./App.css";
 
 const URL_API = "https://www.omdbapi.com/?apikey=ab39c9c0";
@@ -12,10 +13,12 @@ const movie1 = {
 };
 
 function App() {
+  const [movies, setMovies] = useState([]);
+
   const SearchMovies = async (title) => {
     const response = await fetch(`${URL_API}&s=${title}`);
     const data = await response.json();
-    console.log(data.Search);
+    setMovies(data.Search);
   };
 
   useEffect(() => {
@@ -35,22 +38,9 @@ function App() {
         ></input>
         <img src="" alt={"search"} onClick={() => {}} />
       </div>
+
       <div className="container">
-        <div className="movie">
-          <p style={{ color: "red" }}>{movie1.Year}</p>
-        </div>
-        <div>
-          <img
-            src={
-              movie1.Poster !== "N/A"
-                ? movie1.Poster
-                : "https://via.placeholder.com/400"
-            }
-            alt={movie1.Title}
-          />
-        </div>
-        <span>{movie1.Type}</span>
-        <h3>{movie1.Title}</h3>
+        <MovieCard movie1={movie1} />
       </div>
     </>
   );
