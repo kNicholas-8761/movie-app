@@ -1,17 +1,15 @@
 import { useEffect } from "react";
 import "./App.css";
 
-const URL_API = "https://www.omdbapi.com?apikey=ab39c9c0";
+const URL_API = "https://www.omdbapi.com/?apikey=ab39c9c0";
 
-const movie1 = [
-  {
-    Title: "Xmen: Contest of Champions Part 2",
-    Year: "2020",
-    imdbID: "tt14920216",
-    Type: "movie",
-    Poster: "N/A",
-  },
-];
+const movie1 = {
+  Title: "Xmen: Contest of Champions Part 2",
+  Year: "2020",
+  imdbID: "tt14920216",
+  Type: "movie",
+  Poster: "N/A",
+};
 
 function App() {
   const SearchMovies = async (title) => {
@@ -37,7 +35,23 @@ function App() {
         ></input>
         <img src="" alt={"search"} onClick={() => {}} />
       </div>
-      <div className="container"></div>
+      <div className="container">
+        <div className="movie">
+          <p style={{ color: "red" }}>{movie1.Year}</p>
+        </div>
+        <div>
+          <img
+            src={
+              movie1.Poster !== "N/A"
+                ? movie1.Poster
+                : "https://via.placeholder.com/400"
+            }
+            alt={movie1.Title}
+          />
+        </div>
+        <span>{movie1.Type}</span>
+        <h3>{movie1.Title}</h3>
+      </div>
     </>
   );
 }
