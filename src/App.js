@@ -14,6 +14,7 @@ const movie1 = {
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [searchTerms, setSearchTerms] = useState("");
 
   const SearchMovies = async (title) => {
     const response = await fetch(`${URL_API}&s=${title}`);
@@ -22,7 +23,7 @@ function App() {
   };
 
   useEffect(() => {
-    SearchMovies("Xmen");
+    SearchMovies("Superman");
   }, []);
 
   return (
@@ -36,12 +37,19 @@ function App() {
           value="Superman"
           onChange={() => {}}
         ></input>
-        <img src="" alt={"search"} onClick={() => {}} />
+        <img
+          src="https://raw.githubusercontent.com/gist/adrianhajdin/997a8cdf94234e889fa47be89a4759f1/raw/f13e5a9a0d1e299696aa4a0fe3a0026fa2a387f7/search.svg"
+          alt={"search"}
+          onClick={() => {}}
+        />
       </div>
 
-      {movies ? (
+      {movies?.length > 0 ? (
         <div className="container">
-          <MovieCard movie1={movie1} />
+          {movies.map((movie) => {
+            console.log(movie);
+            return <MovieCard key={movie.imdbID} movie={movie} />;
+          })}
         </div>
       ) : (
         <div className="empty">
